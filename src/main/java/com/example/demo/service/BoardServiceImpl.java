@@ -68,6 +68,28 @@ public class BoardServiceImpl implements BoardService {
 		
 		return null;
 	}
+
+	@Override
+	public void modify(BoardDTO dto) {
+
+		// 전달받은 DOT에서 게시물 번호를 꺼내고, DB에 존제하는지 확인
+		int no = dto.getNo();
+		Optional<Board> optional = repository.findById(no);
+		
+		if(optional.isPresent()) {
+			
+			Board board = optional.get();
+			
+			// 기존 엔티티에서 제목, 내용, 작성자 변경
+			board.setTitle(dto.getTitle());
+			board.setContent(dto.getContent());
+			board.setWriter(dto.getWriter());
+			
+			// 데이터베이스에 업데이트
+			repository.save(board);
+		}
+		
+	}
 	
 }
 

@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 
+<th:block th:replace="~{/layout/basic :: setContent(~{this::content} )}">
+
+<th:block th:fragment="content">
 
 <h1 class="mt-4">Board Modify Page</h1>
 
@@ -7,28 +10,28 @@
 
   <div class="form-group">
     <label >번호</label>
-    <input type="text" class="form-control" name="" value="1" readonly>
+    <input type="text" class="form-control" name="no" th:value="${dto.no}" readonly>
   </div>
 
   <div class="form-group">
     <label >제목</label>
-    <input type="text" class="form-control" name="" value="1번">
+    <input type="text" class="form-control" name="title" th:value="${dto.title}">
   </div>
   <div class="form-group">
     <label >내용</label>
-    <textarea class="form-control" rows="5" name="">내용입니다</textarea>
+    <textarea class="form-control" rows="5" name="content">[[${dto.content}]]</textarea>
   </div>
   <div class="form-group">
     <label >작성자</label>
-    <input type="text" class="form-control" name="" value="둘리" readonly>
+    <input type="text" class="form-control" name="writer" th:value="${dto.writer}" readonly>
   </div>
   <div class="form-group">
     <label >등록일</label>
-    <input type="text" class="form-control" value="2023/02/21 10:00:00" readonly>
+    <input type="text" class="form-control" th:value="${#temporals.format(dto.regDate, 'yyyy/MM/dd HH:mm:ss')}" readonly>
   </div>
   <div class="form-group">
     <label >수정일</label>
-    <input type="text" class="form-control" value="2023/02/21 10:00:00" readonly>
+    <input type="text" class="form-control" th:value="${#temporals.format(dto.modDate, 'yyyy/MM/dd HH:mm:ss')}" readonly>
   </div>
 
 </form>
@@ -39,4 +42,7 @@
 
 <button type="button" class="btn btn-danger removeBtn">삭제</button>
 
+</th:block>
+
+</th:block>
 

@@ -76,4 +76,24 @@ public class BoardController {
 		model.addAttribute("dto", dto);
 	}
 	
+	// 수정화면을 반환하는 메소드
+	@GetMapping("/modify") // /board/modify?no=1
+	public void modify(@RequestParam(name = "no") int no, Model model) {
+		
+		// 전달받은 게시물 번호로 게시물 정보 조회
+		BoardDTO dto = service.read(no);
+		
+		// 조회한 데이터를 화면에 전달
+		model.addAttribute("dto", dto);		
+	}
+	
+//    @PostMapping("/modify")
+//    public String modifyPost(BoardDTO dto, RedirectAttributes redirectAttributes) {
+//        
+//        service.modify(dto);
+//        
+//        redirectAttributes.addAttribute("no", dto.getNo());
+//        
+//        return "redirect:/board/read";
+//    }
 }
