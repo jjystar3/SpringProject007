@@ -44,7 +44,21 @@
 
 </th:block>
 
-<!--
+<!-- 전달받은 자바의 데이터를 자바스크립트의 자료형으로 변환하는 기능 -->
 <script th:inline="javascript">
+	
+	/* 화면이 처음 로드가 될 때 새로운 게시물의 번호를 표시 */
+	$(document).ready(
+		function(){
+			let no = [[${no}]];
+			
+			/* 새로운 게시물 번호가 있는 경우에만 표시 */
+			if(no!=null){
+				alert(no + "번 글이 등록되었습니다");
+			}
+			
+		}	
+	);
+	
 </script>
--->
+
