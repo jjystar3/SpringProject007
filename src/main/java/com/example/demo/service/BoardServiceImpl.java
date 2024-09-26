@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +51,22 @@ public class BoardServiceImpl implements BoardService {
 
 		// 변환한 DTO 리스트 반환
         return list;
+	}
+
+	@Override
+	public BoardDTO read(int no) {
+
+		// 게시물 번호로 글 조회
+		Optional<Board> optional = repository.findById(no);
+		
+		// 값이 있는지 확인
+		if(optional.isPresent()) {
+			Board board = optional.get();
+			BoardDTO dto = entityToDTO(board);
+			return dto;
+		}
+		
+		return null;
 	}
 	
 }

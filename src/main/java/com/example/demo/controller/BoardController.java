@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.dto.BoardDTO;
@@ -62,6 +63,17 @@ public class BoardController {
 		// 목록화면으로 리다이렉트
 		// 리다이렉트: 새로운 URL을 다시 호출하는 것
 		return "redirect:/board/list";
+	}
+	
+	// 상세화면을 반환하는 메소드
+	@GetMapping("/read") // /board/read?no=1
+	public void read(@RequestParam(name = "no") int no, Model model) {
+		
+		// 게시물 번호를 파라미터로 전달받아 게시물 정보 조회
+		BoardDTO dto = service.read(no);
+		
+		// 조회한 데이터를 화면에 전달
+		model.addAttribute("dto", dto);
 	}
 	
 }
