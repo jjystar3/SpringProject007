@@ -81,13 +81,16 @@ public class BoardController {
 	
 	// 상세화면을 반환하는 메소드
 	@GetMapping("/read") // /board/read?no=1
-	public void read(@RequestParam(name = "no") int no, Model model) {
+	public void read(@RequestParam(name = "no") int no, @RequestParam(defaultValue = "0", name = "page") int page, Model model) {
 		
 		// 게시물 번호를 파라미터로 전달받아 게시물 정보 조회
 		BoardDTO dto = service.read(no);
 		
 		// 조회한 데이터를 화면에 전달
 		model.addAttribute("dto", dto);
+		
+		// 페이지 번호를 화면에 전달 (가지고 있기)
+		model.addAttribute("page", page);
 	}
 	
 	// 수정화면을 반환하는 메소드
