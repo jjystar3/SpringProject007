@@ -19,6 +19,9 @@ public interface BoardService {
 	// 게시물 수정 메소드
 	void modify(BoardDTO dto);
 	
+	// 게시물 삭제 메소드
+	void remove(int no);
+	
 	// default 키워드: 인터페이스에서 일반 함수를 추가하는 기능
 	// DTO를 엔티티로 변환하는 메소드
 	default Board dtoToEntity(BoardDTO dto) {

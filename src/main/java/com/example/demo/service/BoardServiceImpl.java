@@ -90,6 +90,18 @@ public class BoardServiceImpl implements BoardService {
 		}
 		
 	}
+
+	@Override
+	public void remove(int no) {
+
+		// 게시물이 존재하는지 확인하고 삭제
+		Optional<Board> optional = repository.findById(no);
+
+		if(optional.isPresent()) {
+			repository.deleteById(no);
+		}
+		
+	}
 	
 }
 

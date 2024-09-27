@@ -14,6 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.example.demo.dto.BoardDTO;
 import com.example.demo.service.BoardService;
 
+
 @Controller
 @RequestMapping("/board")
 public class BoardController {
@@ -87,13 +88,36 @@ public class BoardController {
 		model.addAttribute("dto", dto);		
 	}
 	
-//    @PostMapping("/modify")
-//    public String modifyPost(BoardDTO dto, RedirectAttributes redirectAttributes) {
-//        
-//        service.modify(dto);
-//        
-//        redirectAttributes.addAttribute("no", dto.getNo());
-//        
-//        return "redirect:/board/read";
-//    }
+	// 수정 처리 메소드
+    @PostMapping("/modify")
+    public String modifyPost(BoardDTO dto, RedirectAttributes redirectAttributes) {
+        
+    	// 전달받은 폼데이터로 기존 게시물 수정
+        service.modify(dto);
+        
+        // 상세화면으로 이동할때 파라미터 전달
+        redirectAttributes.addAttribute("no", dto.getNo());
+
+        // 상세화면으로 이동
+        return "redirect:/board/read";
+    }
+    //redirectAttributes의 기능
+    //addFlashAttribute(): 리다이렉트할 화면에 데이터를 보내는 함수
+    //addAttribute(): 리다이렉트 주소에 파라미터를 추가하는 함수
+    
+    // 삭제 처리 메소드
+    @PostMapping("/remove")
+    // 폼 데이터 중 단일 항목을 처리할 때는 자동으로 매핑이 안됨
+    // @RequestParam을 사용하여 처리
+    public String removePost(@RequestParam("no") int no) {
+    	
+    	// 전달받은 파라미터로 게시물 삭제
+    	service.remove(no);
+    	
+    	// 삭제 후 목록화면으로 이동
+        return "redirect:/board/list";
+    }
+    
+    
+    
 }
