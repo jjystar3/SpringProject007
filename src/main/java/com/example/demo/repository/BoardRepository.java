@@ -1,11 +1,13 @@
 package com.example.demo.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 
 import com.example.demo.entity.Board;
 
 //JpaRepository 상속받기
 //엔티티와 pk타입 지정
-public interface BoardRepository extends JpaRepository<Board, Integer>{
+public interface BoardRepository extends JpaRepository<Board, Integer>,
+											QuerydslPredicateExecutor<Board>{
 
 }
